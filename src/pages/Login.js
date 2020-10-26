@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 export default function Login(){
     const [signUp,setSignUp] = useState(false);
+    function submitForm(e){
+        e.preventDefault();
+        alert('sucesso');
+    }
     return (
         <Page>
             <TitleContainer>
@@ -12,25 +16,28 @@ export default function Login(){
                 </div>
             </TitleContainer>
             <Aside>
+                <Form onSubmit={(e)=>submitForm(e)}>
                 {
                     signUp ?
-                    <Form>
+                    <div>
                         <input type="email" placeholder="e-mail" />
                         <input type="password" placeholder="password" />
                         <input type="text" placeholder="username" />
                         <input type="url" placeholder="picture url" />
                         <button type="submit">Sign Up</button>
-                    </Form>
+                    </div>
                     :
-                     <Form>
+                     <div> 
                         <input type="email" placeholder="e-mail" />
                         <input type="password" placeholder="password" />
                         <button type="submit">Log In</button>
-                     </Form>
+                     </div>
                 }
+                </Form>
                 <span onClick={() => setSignUp(!signUp)}>
                    {signUp ? 'Switch back to log in' : 'First time? Create an account!'}
                 </span>
+                
             </Aside>
         </Page>
     );
@@ -60,7 +67,7 @@ const TitleContainer = styled.div`
         line-height: 45px;
     }
 `
-const Aside = styled.form`
+const Aside = styled.div`
     background: #333;
     width: 38%;
     color: #FFF;
@@ -79,9 +86,14 @@ const Aside = styled.form`
 `
 
 const Form = styled.form`
-    width: 90%;
+    width: 100%;
     display: flex;
-    flex-direction:column;
+    justify-content:center;
+    div{
+        width: 90%;
+        display: flex;
+        flex-direction:column;
+    }
     
     input{
         border-radius: 5px;
