@@ -7,16 +7,15 @@ import UserContext from '../contexts/UserContext';
 export default function Login() {
     const history = useHistory();
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    const { setLogIn, setSignUp, logIn, signUp} = useContext(UserContext);
+    const { setLogIn, setSignUp, logIn, signUp,setUserData } = useContext(UserContext);
     const [signUpState, setSignUpState] = useState(false);
     function submitForm(event) {
         event.preventDefault();
-        if(signUpState) {
+        if (signUpState) {
             trySignUp();
         } else tryLogin();
     }
     function tryLogin() {
-        console.log('login');
         const { email, password } = logIn;
         if (buttonDisabled) return;
         let cont = 0;
@@ -31,19 +30,21 @@ export default function Login() {
         if (cont === 0) {
             setButtonDisabled(true);
         }
-        const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_in', logIn);
+        if (cont === 0) {
+            const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_in', logIn);
 
             request.then((response) => {
                 console.log(response)
+                setUserData({...response.data.user,'token':response.data.token});
                 history.push('/timeline');
             });
             request.catch((error) => {
-                console.log(error)
+                alert('E-mail/senha inválidos')
                 setButtonDisabled(false);
             });
+        }
     }
     function trySignUp() {
-        console.log('signup');
         const { email, password, username, pictureUrl } = signUp;
         let cont = 0;
         if (buttonDisabled) return;
@@ -72,16 +73,13 @@ export default function Login() {
                 history.push('/timeline');
             });
             request.catch((error) => {
-                console.log(error)
+                alert('Erro ao cadastrar! Verifique os campos!')
                 setButtonDisabled(false);
             });
         }
     }
-    //não sei pq ele não está me retornando erro quando deixou algum campo em branco, aparentemente a API aceita requisições com username vazio e nós que precisamos tratar
 
     //não achei a solução do cont++ elegante, futuramente pensar numa solução melhor
-
-    //acho uma boa ideia fazermos esse tratamento e a requisição dos dados via context, pois certamente teremos que usar esses dados do usuário mais pra frente
 
     //verificar como guardar o token do usuário
     //}

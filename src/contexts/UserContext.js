@@ -3,25 +3,24 @@ const UserContext = createContext();
 export default UserContext;
 
 export function UserContextProvider(props){
-    const [logIn,setLogIn] = useState({});
-    const [signUp,setSignUp] = useState({});
-    
+    const loginStruct = {
+        email:"",
+        password:""
+    };
+    const signUpStruct = {
+        email:"",
+        password:"",
+        username:"",
+        pictureUrl:""
+    };
+    const [logIn,setLogIn] = useState(loginStruct);
+    const [signUp,setSignUp] = useState(signUpStruct);
+    const [userData,setUserData] = useState({});
+    console.log(userData);
     return(
-        <UserContext.Provider value={{setLogIn,setSignUp,logIn,signUp}}>
+        <UserContext.Provider value={{setLogIn,setSignUp,logIn,signUp,setUserData}}>
             {props.children}
         </UserContext.Provider>
     );
 }
 
-/* 
-    const logIn = {
-        email:
-        password:
-    }
-    const signUp = {
-        email:
-        password:
-        username:
-        pictureUrl:
-    }
-*/
