@@ -16,17 +16,15 @@ export default function Login() {
         } else tryLogin();
     }
     function tryLogin() {
-        const { email, password } = logIn;
         if (buttonDisabled) return;
+        const entries = Object.entries(logIn);
         let cont = 0;
-        if (email === "") {
-            cont++;
-            alert("Preencha o email!");
-        }
-        if (password === "") {
-            cont++;
-            alert("Preencha a senha!");
-        }
+        entries.forEach(entrie => {
+            if(entrie[1] === ""){
+                cont ++;
+                alert(`Preencha o campo ${entrie[0]}`);
+            }
+        });
         if (cont === 0) {
             setButtonDisabled(true);
         }
@@ -45,25 +43,15 @@ export default function Login() {
         }
     }
     function trySignUp() {
-        const { email, password, username, pictureUrl } = signUp;
         let cont = 0;
         if (buttonDisabled) return;
-        if (email === "") {
-            cont++;
-            alert("Preencha o email!");
-        }
-        if (password === "") {
-            cont++;
-            alert("Preencha a senha!");
-        }
-        if (username === "") {
-            cont++;
-            alert("Preencha o username!");
-        }
-        if (pictureUrl === "") {
-            cont++;
-            alert("Insira uma imagem!");
-        }
+        const entries = Object.entries(signUp);
+        entries.forEach(entrie => {
+            if(entrie[1] === ""){
+                cont ++;
+                alert(`Preencha o campo ${entrie[0]}`);
+            }
+        });
         if (cont === 0) {
             setButtonDisabled(true);
             const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_up', signUp);
