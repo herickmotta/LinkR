@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './pages/Login';
+import Timeline from './pages/Timeline';
 import {
     BrowserRouter as Router,
     Switch,
@@ -18,7 +19,7 @@ export default function App(){
                         <Login />
                     </Route>
                     <Route path='/timeline'>
-                        <h1>timeline</h1>
+                        <Timeline />
                     </Route>
                 </Switch>
             </Router>
