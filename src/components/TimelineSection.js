@@ -1,10 +1,22 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
-
+import getPosts from '../data/postsMock';
 import TrendingTopics from './TrendingTopics';
+import axios from 'axios';
 export default function TimelineSection() {
-    const { userData } = useContext(UserContext);
+    const { userData,setInputPost,inputPost } = useContext(UserContext);
+    const {posts} = getPosts();
+    const token =  "34d11bbf-f9e9-4934-9b21-ccaada2a1536";
+    function publishPost(){
+        if(inputPost.link.length !== 0){
+            const headers = {
+                'user-token': token
+            }
+            const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts`,inputPost,{headers});
+            request.then((response) => console.log(response)).catch((e)=>console.log(e));
+        }
+    }
     return (
         <Page>
             <h1>timeline</h1>
@@ -16,18 +28,16 @@ export default function TimelineSection() {
                         </LeftBox>
                         <RightBox>
                             <h1>O que você tem pra favoritar hoje?</h1>
-                            <input placeholder="Insira aqui o link" />
-                            <textarea placeholder="Comentário" />
+                            <input placeholder="Insira aqui o link" onChange={e => setInputPost({ ...inputPost, 'link': e.target.value })}/>
+                            <textarea placeholder="Comentário" onChange={e => setInputPost({ ...inputPost, 'text': e.target.value })}/>
                             <div>
-                                <Button>
+                            <Button onClick={(e) => publishPost()}>
                                     Publicar
                             </Button>
                             </div>
                         </RightBox>
                     </InputPostBox>
-                    <PostBox>
-                        
-                    </PostBox>
+
                 </div>
                 <TrendingTopics />
             </Section>

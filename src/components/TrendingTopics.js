@@ -11,7 +11,9 @@ export default function TrendingTopics(){
             <h2>trending</h2>
             <List>
                 {hashtags.map(t => 
-                    <li>{`# ${t.name}`}</li>
+                    <li key={t.id}>
+                        {`# ${t.name}`}
+                    </li>
                 )}
             </List>
         </Section>
