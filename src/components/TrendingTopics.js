@@ -2,30 +2,45 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import getTrending from '../data/trendingMock';
+
 export default function TrendingTopics(){
     const {hashtags} = getTrending();
     return (
+        <>
         <Section>
-            <h1>Trending</h1>
-            <ul>
+            <h2>trending</h2>
+            <List>
                 {hashtags.map(t => 
-                    <li>{t.name}</li>
+                    <li>{`# ${t.name}`}</li>
                 )}
-            </ul>
+            </List>
         </Section>
+        </>
     );
 }
 
 const Section = styled.section`
+    
     background: #151515;
     color:#FFF;
     width: 300px;
-    height: 500px;
+    height: 350px;
     border-radius: 10px;
-    padding-top: 80px;
+    margin: 0 0 0 20px;
+
+    h2{
+        padding:15px;
+        border-bottom: 1px solid rgba(255,255,255,0.3);
+        font-size: 2vw;
+    }
 `;
 
 const List = styled.ul`
-
+    font-family: 'Lato', sans-serif;
+    font-weight:bold;
+    padding: 20px 0 0 15px;
+    li{
+        margin-bottom: 10px;
+    }
 `;
 

@@ -5,14 +5,13 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 import Topbar from '../components/TopBar';
 import TimelineSection from '../components/TimelineSection';
-import TrendingTopics from '../components/TrendingTopics';
+
 export default function Timeline(){
 
     return (
         <Page>
             <Topbar />
             <TimelineSection /> 
-            <TrendingTopics />
         </Page>
     );
 }

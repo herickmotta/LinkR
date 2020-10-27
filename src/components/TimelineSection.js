@@ -2,37 +2,48 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 
+import TrendingTopics from './TrendingTopics';
 export default function TimelineSection() {
     const { userData } = useContext(UserContext);
     return (
-        <Section>
+        <Page>
             <h1>timeline</h1>
-            <PostBox>
-                <LeftBox>
-                    <img src={userData.pictureUrl} />
-                </LeftBox>
-                <RightBox>
-                    <h1>O que você tem pra favoritar hoje?</h1>
-                    <input placeholder="Insira aqui o link" />
-                    <textarea placeholder="Comentário" />
-                    <div>
-                        <Button>
-                            Publicar
-                    </Button>
-                    </div>
-                </RightBox>
-            </PostBox>
-        </Section>
+            <Section>
+                <div>  
+                    <PostBox>
+                        <LeftBox>
+                            <img src={userData.pictureUrl} />
+                        </LeftBox>
+                        <RightBox>
+                            <h1>O que você tem pra favoritar hoje?</h1>
+                            <input placeholder="Insira aqui o link" />
+                            <textarea placeholder="Comentário" />
+                            <div>
+                                <Button>
+                                    Publicar
+                            </Button>
+                            </div>
+                        </RightBox>
+                    </PostBox>
+                </div>
+                <TrendingTopics />
+            </Section>
+        </Page>
     );
 }
 
-const Section = styled.section`
+const Page = styled.div`
     color:#FFF;
     padding-top:100px;
     h1{
         font-size: 3vw;
         font-family: 'Oswald', sans-serif;
+        margin-bottom: 20px;
     }
+`;
+
+const Section = styled.section`
+    display:flex;
 `;
 
 const PostBox = styled.div`
@@ -40,7 +51,6 @@ const PostBox = styled.div`
     background: white;
     border-radius: 16px;
     width: 40vw;
-    margin-top: 40px;
 `
 const LeftBox = styled.div`
     height: 100;
