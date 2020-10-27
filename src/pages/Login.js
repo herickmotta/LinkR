@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 export default function Login() {
+    const history = useHistory();
+    const [buttonDisabled, setButtonDisabled] = useState(false);
     const [signUp, setSignUp] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -13,11 +16,10 @@ export default function Login() {
 
     function tryLogin(event) {
         event.preventDefault();
+
+        if(buttonDisabled) return;
+
         let cont = 0;
-        if (username === "") {
-            cont++;
-            alert("Preencha o username!");
-        }
         if (email === ""){
             cont++;
             alert("Preencha o email!");
@@ -26,19 +28,37 @@ export default function Login() {
             cont++;
             alert("Preencha a senha!");
         } 
+        if (username === "") {
+            cont++;
+            alert("Preencha o username!");
+        }
         if (imgUrl === ""){
             cont++;
             alert("Insira uma imagem!");
         } 
 
         if (cont === 0) {
+            setButtonDisabled(true);
+
             const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_up', userData);
-            request.then((response) => console.log(response)).catch((error) => console.log(error));
+
+            request.then((response) => {
+                console.log(response)
+                history.push('/timeline');
+            }); 
+            request.catch((error) => {
+                console.log(error)
+                setButtonDisabled(false);
+            });
         }
 
         //não sei pq ele não está me retornando erro quando deixou algum campo em branco, aparentemente a API aceita requisições com username vazio e nós que precisamos tratar
-        
+
         //não achei a solução do cont++ elegante, futuramente pensar numa solução melhor
+
+        //acho uma boa ideia fazermos esse tratamento e a requisição dos dados via context, pois certamente teremos que usar esses dados do usuário mais pra frente
+
+        //verificar como guardar o token do usuário
     }
     return (
         <Page>
@@ -99,7 +119,7 @@ const TitleContainer = styled.div`
         line-height: 45px;
     }
 `
-const Aside = styled.div`
+const Aside = styled.div` //esse Aside estava como form, precisei trocar pra div pq tava dando erro no console de um form dentro do outro
     background: #333;
     width: 38%;
     color: #FFF;
@@ -116,7 +136,6 @@ const Aside = styled.div`
         letter-spacing: 1.2px;
     }
 `
-
 const Form = styled.div`
     width: 90%;
     display: flex;
