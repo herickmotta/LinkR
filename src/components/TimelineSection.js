@@ -10,7 +10,7 @@ export default function TimelineSection() {
             <h1>timeline</h1>
             <Section>
                 <div>  
-                    <PostBox>
+                    <InputPostBox>
                         <LeftBox>
                             <img src={userData.pictureUrl} />
                         </LeftBox>
@@ -24,6 +24,9 @@ export default function TimelineSection() {
                             </Button>
                             </div>
                         </RightBox>
+                    </InputPostBox>
+                    <PostBox>
+                        
                     </PostBox>
                 </div>
                 <TrendingTopics />
@@ -46,7 +49,7 @@ const Section = styled.section`
     display:flex;
 `;
 
-const PostBox = styled.div`
+const InputPostBox = styled.div`
     display: flex;
     background: white;
     border-radius: 16px;
