@@ -1,43 +1,75 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-export default function Login(){
-    const [signUp,setSignUp] = useState(false);
-    function submitForm(e){
-        e.preventDefault();
-        alert('sucesso');
+import axios from 'axios';
+
+export default function Login() {
+    const [signUp, setSignUp] = useState(false);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [imgUrl, setImgUrl] = useState("");
+    const userData = { "email": email, "password": password, "username": username, "pictureUrl": imgUrl };
+
+    function tryLogin(event) {
+        event.preventDefault();
+        let cont = 0;
+        if (username === "") {
+            cont++;
+            alert("Preencha o username!");
+        }
+        if (email === ""){
+            cont++;
+            alert("Preencha o email!");
+        }
+        if (password === ""){
+            cont++;
+            alert("Preencha a senha!");
+        } 
+        if (imgUrl === ""){
+            cont++;
+            alert("Insira uma imagem!");
+        } 
+
+        if (cont === 0) {
+            const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_up', userData);
+            request.then((response) => console.log(response)).catch((error) => console.log(error));
+        }
+
+        //não sei pq ele não está me retornando erro quando deixou algum campo em branco, aparentemente a API aceita requisições com username vazio e nós que precisamos tratar
+        
+        //não achei a solução do cont++ elegante, futuramente pensar numa solução melhor
     }
     return (
         <Page>
             <TitleContainer>
                 <div>
                     <h1>linkr</h1>
-                    <p>save, share and discover<br/> the best links on the web</p>                
+                    <p>save, share and discover<br /> the best links on the web</p>
                 </div>
             </TitleContainer>
             <Aside>
-                <Form onSubmit={(e)=>submitForm(e)}>
-                {
-                    signUp ?
-                    <div>
-                        <input type="email" placeholder="e-mail" />
-                        <input type="password" placeholder="password" />
-                        <input type="text" placeholder="username" />
-                        <input type="url" placeholder="picture url" />
-                        <button type="submit">Sign Up</button>
-                    </div>
-                    :
-                     <div> 
-                        <input type="email" placeholder="e-mail" />
-                        <input type="password" placeholder="password" />
-                        <button type="submit">Log In</button>
-                     </div>
-                }
-                </Form>
-                <span onClick={() => setSignUp(!signUp)}>
-                   {signUp ? 'Switch back to log in' : 'First time? Create an account!'}
+                <form onSubmit={(event) => tryLogin(event)}>
+                    {
+                        signUp ?
+                            <Form>
+                                <input type="email" placeholder="e-mail" onChange={e => setEmail(e.target.value)} />
+                                <input type="password" placeholder="password" onChange={e => setPassword(e.target.value)} />
+                                <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)} />
+                                <input type="url" placeholder="picture url" onChange={e => setImgUrl(e.target.value)} />
+                                <button type="submit" onClick={(e) => tryLogin(e)}>Sign Up</button>
+                            </Form>
+                            :
+                            <Form>
+                                <input type="email" placeholder="e-mail" onChange={e => setEmail(e.target.value)} />
+                                <input type="password" placeholder="password" onChange={e => setPassword(e.target.value)} />
+                                <button type="submit">Log In</button>
+                            </Form>
+                    }
+                </form>
+                <span onClick={() => { setSignUp(!signUp) }}>
+                    {signUp ? 'Switch back to log in' : 'First time? Create an account!'}
                 </span>
-                
             </Aside>
         </Page>
     );
@@ -85,15 +117,10 @@ const Aside = styled.div`
     }
 `
 
-const Form = styled.form`
-    width: 100%;
+const Form = styled.div`
+    width: 90%;
     display: flex;
-    justify-content:center;
-    div{
-        width: 90%;
-        display: flex;
-        flex-direction:column;
-    }
+    flex-direction:column;
     
     input{
         border-radius: 5px;
