@@ -17,18 +17,9 @@ export default function Login() {
     }
     function tryLogin() {
         if (buttonDisabled) return;
-        const entries = Object.entries(logIn);
-        let cont = 0;
-        entries.forEach(entrie => {
-            if(entrie[1] === ""){
-                cont ++;
-                alert(`Preencha o campo ${entrie[0]}`);
-            }
-        });
+        const cont = validateForm(logIn);
         if (cont === 0) {
             setButtonDisabled(true);
-        }
-        if (cont === 0) {
             const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_in', logIn);
 
             request.then((response) => {
@@ -43,15 +34,8 @@ export default function Login() {
         }
     }
     function trySignUp() {
-        let cont = 0;
+        const cont = validateForm(signUp);
         if (buttonDisabled) return;
-        const entries = Object.entries(signUp);
-        entries.forEach(entrie => {
-            if(entrie[1] === ""){
-                cont ++;
-                alert(`Preencha o campo ${entrie[0]}`);
-            }
-        });
         if (cont === 0) {
             setButtonDisabled(true);
             const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_up', signUp);
@@ -66,11 +50,17 @@ export default function Login() {
             });
         }
     }
-
-    //não achei a solução do cont++ elegante, futuramente pensar numa solução melhor
-
-    //verificar como guardar o token do usuário
-    //}
+    function validateForm(obj){
+        let cont = 0;
+        const entries = Object.entries(obj);
+        entries.forEach(entrie => {
+            if(entrie[1] === ""){
+                cont ++;
+                alert(`Preencha o campo ${entrie[0]}`);
+            }
+        });
+        return cont;
+    }
     return (
         <Page>
             <TitleContainer>
