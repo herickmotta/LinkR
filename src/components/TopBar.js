@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import { IoIosArrowDown } from "react-icons/io";
+import {Link} from 'react-router-dom';
 export default function Topbar(){
     const [DropMenu,SetDropMenu] = useState(false);
     const {userData} = useContext(UserContext);
@@ -11,15 +12,16 @@ export default function Topbar(){
             <h1>
                 linkr
             </h1>
-            <div>
+            <div onClick={() => SetDropMenu(!DropMenu)}>
                 <Menu
                  opacity={DropMenu? '1':'0'}
                  translate={DropMenu? 'translateY(0)':'translateY(-20px)'}
+                 rotate={DropMenu? 'rotate(180deg)':'rotate(0)'}
                 >
-                    <IoIosArrowDown onClick={() => SetDropMenu(!DropMenu)} />
+                    <div><IoIosArrowDown  /></div>
                     <nav>
-                        <h2>My posts</h2>
-                        <h2>Logout</h2>
+                        <Link to='/my-posts'>My posts</Link>
+                        <Link to='/'>Logout</Link>
                     </nav>
                 </Menu>
                 <img src={userData.pictureUrl} />
@@ -61,10 +63,12 @@ const Menu = styled.div`
     color: #FFF;
     font-size: 3vw;
     margin-right: 10px;
-    & :first-child{
-        z-index:4;
+    div{
+        transform: ${props => props.rotate};
     }
     nav {
+        display:flex;
+        flex-direction:column;
         font-size: 1.5vw;
         top:50px;
         position: absolute;
@@ -78,7 +82,7 @@ const Menu = styled.div`
         padding: 20px;
         transform: ${props => props.translate};
     }
-    h2{
+    a{
         padding: 10px;
     }
     

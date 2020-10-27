@@ -5,15 +5,14 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 import Topbar from '../components/TopBar';
 import TimelineSection from '../components/TimelineSection';
-
+import TrendingTopics from '../components/TrendingTopics';
 export default function Timeline(){
 
     return (
         <Page>
             <Topbar />
-            
             <TimelineSection /> 
-            <TrendingTopic />
+            <TrendingTopics />
         </Page>
     );
 }
@@ -24,10 +23,4 @@ const Page = styled.div`
     height: 100vh;
     display:flex;
     justify-content:center;
-`
-const TrendingTopic = styled.div`
-    background: #000;
-    width: 300px;
-    height: 500px;
-    border-radius: 10px;
 `
