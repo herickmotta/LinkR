@@ -13,12 +13,16 @@ export function UserContextProvider(props){
         username:"",
         pictureUrl:""
     };
+    const userDataStruct = {
+        username:"HerickM",
+        pictureUrl:"https://pbs.twimg.com/profile_images/802982691478114304/UdQD82ju_400x400.jpg"
+    }
     const [logIn,setLogIn] = useState(loginStruct);
     const [signUp,setSignUp] = useState(signUpStruct);
-    const [userData,setUserData] = useState({});
+    const [userData,setUserData] = useState(userDataStruct);
     console.log(userData);
     return(
-        <UserContext.Provider value={{setLogIn,setSignUp,logIn,signUp,setUserData}}>
+        <UserContext.Provider value={{setLogIn,setSignUp,logIn,signUp,setUserData,userData}}>
             {props.children}
         </UserContext.Provider>
     );
