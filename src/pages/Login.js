@@ -1,65 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import UserContext from '../contexts/UserContext';
 export default function Login() {
     const history = useHistory();
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    const [signUp, setSignUp] = useState(false);
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [imgUrl, setImgUrl] = useState("");
-    const userData = { "email": email, "password": password, "username": username, "pictureUrl": imgUrl };
-
-    function tryLogin(event) {
+    const { setLogIn, setSignUp, logIn, signUp} = useContext(UserContext);
+    const [signUpState, setSignUpState] = useState(false);
+    function submitForm(event) {
         event.preventDefault();
-
-        if(buttonDisabled) return;
-
+        if(signUpState) {
+            trySignUp();
+        } else tryLogin();
+    }
+    function tryLogin() {
+        console.log('login');
+        const { email, password } = logIn;
+        if (buttonDisabled) return;
         let cont = 0;
-        if (email === ""){
+        if (email === "") {
             cont++;
             alert("Preencha o email!");
         }
-        if (password === ""){
+        if (password === "") {
             cont++;
             alert("Preencha a senha!");
-        } 
-        if (username === "") {
-            cont++;
-            alert("Preencha o username!");
         }
-        if (imgUrl === ""){
-            cont++;
-            alert("Insira uma imagem!");
-        } 
-
         if (cont === 0) {
             setButtonDisabled(true);
-
-            const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_up', userData);
+        }
+        const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_in', logIn);
 
             request.then((response) => {
                 console.log(response)
                 history.push('/timeline');
-            }); 
+            });
+            request.catch((error) => {
+                console.log(error)
+                setButtonDisabled(false);
+            });
+    }
+    function trySignUp() {
+        console.log('signup');
+        const { email, password, username, pictureUrl } = signUp;
+        let cont = 0;
+        if (buttonDisabled) return;
+        if (email === "") {
+            cont++;
+            alert("Preencha o email!");
+        }
+        if (password === "") {
+            cont++;
+            alert("Preencha a senha!");
+        }
+        if (username === "") {
+            cont++;
+            alert("Preencha o username!");
+        }
+        if (pictureUrl === "") {
+            cont++;
+            alert("Insira uma imagem!");
+        }
+        if (cont === 0) {
+            setButtonDisabled(true);
+            const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_up', signUp);
+
+            request.then((response) => {
+                console.log(response)
+                history.push('/timeline');
+            });
             request.catch((error) => {
                 console.log(error)
                 setButtonDisabled(false);
             });
         }
-
-        //não sei pq ele não está me retornando erro quando deixou algum campo em branco, aparentemente a API aceita requisições com username vazio e nós que precisamos tratar
-
-        //não achei a solução do cont++ elegante, futuramente pensar numa solução melhor
-
-        //acho uma boa ideia fazermos esse tratamento e a requisição dos dados via context, pois certamente teremos que usar esses dados do usuário mais pra frente
-
-        //verificar como guardar o token do usuário
     }
+    //não sei pq ele não está me retornando erro quando deixou algum campo em branco, aparentemente a API aceita requisições com username vazio e nós que precisamos tratar
+
+    //não achei a solução do cont++ elegante, futuramente pensar numa solução melhor
+
+    //acho uma boa ideia fazermos esse tratamento e a requisição dos dados via context, pois certamente teremos que usar esses dados do usuário mais pra frente
+
+    //verificar como guardar o token do usuário
+    //}
     return (
         <Page>
             <TitleContainer>
@@ -69,26 +94,26 @@ export default function Login() {
                 </div>
             </TitleContainer>
             <Aside>
-                <form onSubmit={(event) => tryLogin(event)}>
+                <form onSubmit={(event) => submitForm(event)}>
                     {
-                        signUp ?
+                        signUpState ?
                             <Form>
-                                <input type="email" placeholder="e-mail" onChange={e => setEmail(e.target.value)} />
-                                <input type="password" placeholder="password" onChange={e => setPassword(e.target.value)} />
-                                <input type="text" placeholder="username" onChange={e => setUsername(e.target.value)} />
-                                <input type="url" placeholder="picture url" onChange={e => setImgUrl(e.target.value)} />
-                                <button type="submit" onClick={(e) => tryLogin(e)}>Sign Up</button>
+                                <input type="email" placeholder="e-mail" onChange={e => setSignUp({ ...signUp, 'email': e.target.value })} />
+                                <input type="password" placeholder="password" onChange={e => setSignUp({ ...signUp, 'password': e.target.value })} />
+                                <input type="text" placeholder="username" onChange={e => setSignUp({ ...signUp, 'username': e.target.value })} />
+                                <input type="url" placeholder="picture url" onChange={e => setSignUp({ ...signUp, 'pictureUrl': e.target.value })} />
+                                <button type="submit">Sign Up</button>
                             </Form>
                             :
                             <Form>
-                                <input type="email" placeholder="e-mail" onChange={e => setEmail(e.target.value)} />
-                                <input type="password" placeholder="password" onChange={e => setPassword(e.target.value)} />
+                                <input type="email" placeholder="e-mail" onChange={e => setLogIn({ ...logIn, 'email': e.target.value })} />
+                                <input type="password" placeholder="password" onChange={e => setLogIn({ ...logIn, 'password': e.target.value })} />
                                 <button type="submit">Log In</button>
                             </Form>
                     }
                 </form>
-                <span onClick={() => { setSignUp(!signUp) }}>
-                    {signUp ? 'Switch back to log in' : 'First time? Create an account!'}
+                <span onClick={() => { setSignUpState(!signUpState) }}>
+                    {signUpState ? 'Switch back to log in' : 'First time? Create an account!'}
                 </span>
             </Aside>
         </Page>
