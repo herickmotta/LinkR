@@ -23,6 +23,12 @@ export default function App(){
                         <Route path='/timeline'>
                             <Timeline />
                         </Route>
+                        <Route path='/my-posts'>
+
+                        </Route>
+                        <Route path='/fulano'>
+                            
+                        </Route>
                     </Switch>
                 </Router>
             </PostContextProvider>
