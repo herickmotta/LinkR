@@ -1,6 +1,5 @@
 import React, { useContext,useEffect } from 'react'
 import styled from 'styled-components';
-import UserContext from '../contexts/UserContext';
 import PostContext from '../contexts/PostContext';
 
 export default function PostBox() {

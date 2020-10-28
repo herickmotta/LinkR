@@ -37,7 +37,7 @@ export default function TimelineSection() {
             <h1 className="title">timeline</h1>
             <Section>
                 <PostsSection>
-                    <InputPostBox>
+                    <InputPostBox> {/*COMPONENTIZAR ESSE ELEMENTO*/}
                         <LeftBox>
                             <img src={userData.pictureUrl} />
                         </LeftBox>
@@ -52,7 +52,7 @@ export default function TimelineSection() {
                             </div>
                         </RightBox>
                     </InputPostBox>
-                    <PostBox />
+                    <PostBox /> {/*FAZER UM ROUTER PRA DECIDIR O FILTRO*/}
                 </PostsSection>
                 <TrendingTopics />
             </Section>
