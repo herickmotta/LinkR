@@ -4,8 +4,10 @@ import UserContext from '../contexts/UserContext';
 import TrendingTopics from './TrendingTopics';
 import axios from 'axios';
 import PostBox from './PostBox';
+import PostContext from '../contexts/PostContext';
 export default function TimelineSection() {
-    const { userData, setInputPost, inputPost } = useContext(UserContext);
+    const { userData } = useContext(UserContext);
+    const { setInputPost, inputPost } = useContext(PostContext);
     function publishPost() {
         if (inputPost.link.length !== 0) {
             const headers = {

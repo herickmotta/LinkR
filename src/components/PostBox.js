@@ -1,10 +1,11 @@
-import React, { useContext,useEffect,useState } from 'react'
+import React, { useContext,useEffect } from 'react'
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import axios from 'axios';
+import PostContext from '../contexts/PostContext';
 export default function PostBox() {
     const { userData } = useContext(UserContext);
-    const [posts,setPosts] = useState([]);
+    const { posts, setPosts } = useContext(PostContext);
 
     useEffect( () => {
         const headers = {
@@ -27,12 +28,12 @@ export default function PostBox() {
                         <a>{post.user.username}</a>
                         <p>{post.text}</p>
                         <ImgBox>
-                        <div>
-                        <p className="titleLink">{post.linkTitle}</p>
-                        <p className="small grey">{post.linkDescription}</p>
-                        <p className="small">{post.link}</p>
-                        </div>
-                        <img src={post.linkImage} />
+                            <div>
+                            <p className="titleLink">{post.linkTitle}</p>
+                            <p className="small grey">{post.linkDescription}</p>
+                            <p className="small">{post.link}</p>
+                            </div>
+                            <img src={post.linkImage} />
                         </ImgBox>
                     </RightBox>
                 </Post>

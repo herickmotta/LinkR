@@ -7,22 +7,25 @@ import {
     Route,
 } from 'react-router-dom';
 import { UserContextProvider } from './contexts/UserContext';
+import { PostContextProvider } from './contexts/PostContext';
 
 
 export default function App(){
 
     return (
         <UserContextProvider>
-            <Router>
-                <Switch>
-                    <Route path='/' exact>
-                        <Login />
-                    </Route>
-                    <Route path='/timeline'>
-                        <Timeline />
-                    </Route>
-                </Switch>
-            </Router>
+            <PostContextProvider>
+                <Router>
+                    <Switch>
+                        <Route path='/' exact>
+                            <Login />
+                        </Route>
+                        <Route path='/timeline'>
+                            <Timeline />
+                        </Route>
+                    </Switch>
+                </Router>
+            </PostContextProvider>
         </UserContextProvider>
     );
 }
