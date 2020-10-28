@@ -1,18 +1,27 @@
-import React, { useContext } from 'react'
-import getPosts from '../data/postsMock';
+import React, { useContext,useEffect,useState } from 'react'
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
-
+import axios from 'axios';
 export default function PostBox() {
     const { userData } = useContext(UserContext);
-    const { posts } = getPosts();
+    const [posts,setPosts] = useState([]);
+
+    useEffect( () => {
+        const headers = {
+            'user-token': userData.token
+        }
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=0&limit=10`, {headers})
+        request.then((response) => {setPosts(response.data.posts);console.log(response);}).catch(e=>console.log(e));
+    },[])
+    
+    if(posts.length === 0) return <h1>Carregando posts...</h1>
     return (
         <>
             {posts.map((post) => {
                 return(
-                <Post>
+                <Post key={post.id}>
                     <LeftBox>
-                        <img src={userData.pictureUrl} />
+                        <img src={post.user.avatar} />
                     </LeftBox>
                     <RightBox>
                         <a>{post.user.username}</a>

@@ -8,11 +8,11 @@ import PostBox from './PostBox';
 export default function TimelineSection() {
     const { userData, setInputPost, inputPost } = useContext(UserContext);
     const { posts } = getPosts();
-    const token = "34d11bbf-f9e9-4934-9b21-ccaada2a1536";
+    
     function publishPost() {
         if (inputPost.link.length !== 0) {
             const headers = {
-                'user-token': token
+                'user-token': userData.token
             }
             const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts`, inputPost, { headers });
             request.then((response) => console.log(response)).catch((e) => console.log(e));
