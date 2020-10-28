@@ -11,7 +11,7 @@ export default function PostBox() {
             'user-token': userData.token
         }
         const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=0&limit=10`, {headers})
-        request.then((response) => {setPosts(response.data.posts);console.log(response);}).catch(e=>console.log(e));
+        request.then((response) => setPosts(response.data.posts)).catch(e=>console.log(e));
     },[])
     
     if(posts.length === 0) return <h1>Carregando posts...</h1>

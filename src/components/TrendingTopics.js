@@ -1,10 +1,20 @@
-import React, { useState, useContext } from 'react';
+import Axios from 'axios';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import getTrending from '../data/trendingMock';
-
+import axios from 'axios';
 export default function TrendingTopics(){
-    const {hashtags} = getTrending();
+    const {userData} = useContext(UserContext);
+    const [hashtags,setHashtags] = useState([]);
+    useEffect(()=> {
+        const headers = {
+            'user-token': userData.token
+        }
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/trending`,{headers})
+        request.then((response) => setHashtags(response.data.hashtags)).catch(e=>console.log(e));
+    },[])
+    if(hashtags.length===0) return <h1>Carregando...</h1>
     return (
         <>
         <Section>
