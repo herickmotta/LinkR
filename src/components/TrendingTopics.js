@@ -2,7 +2,6 @@ import Axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
-import getTrending from '../data/trendingMock';
 import axios from 'axios';
 export default function TrendingTopics(){
     const {userData} = useContext(UserContext);
