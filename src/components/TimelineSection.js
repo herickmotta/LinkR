@@ -1,22 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import TrendingTopics from './TrendingTopics';
 import axios from 'axios';
 import PostBox from './PostBox';
 import PostContext from '../contexts/PostContext';
+
 export default function TimelineSection() {
     const { userData } = useContext(UserContext);
-    const { setInputPost, inputPost } = useContext(PostContext);
+    const { setInputPost, inputPost ,getPosts} = useContext(PostContext);
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+
     function publishPost() {
+        //DESABILITAR OS CAMPOS P EDIÇÃO
+        if(buttonDisabled) return;
         if (inputPost.link.length !== 0) {
+            setButtonDisabled(true);
             const headers = {
                 'user-token': userData.token
             }
             const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts`, inputPost, { headers });
-            request.then().catch((e) => console.log(e));
+            request.then(()=>{
+                setButtonDisabled(false);
+                //LIMPAR CAMPOS
+                getPosts();
+            });
+            request.catch(() => {
+                alert('Houve um erro ao publicar seu link');
+                setButtonDisabled(false);
+            });
         } else alert("Preencha o campo link!");
     }
+
     return (
         <Page>
             <h1 className="title">timeline</h1>
@@ -32,7 +47,7 @@ export default function TimelineSection() {
                             <textarea placeholder="Comentário" onChange={e => setInputPost({ ...inputPost, 'text': e.target.value })} />
                             <div className="buttonDiv">
                             <Button onClick={(e) => publishPost()}>
-                                    Publicar
+                                    {buttonDisabled ? 'Publishing...' : 'Publish'}
                             </Button>
                             </div>
                         </RightBox>

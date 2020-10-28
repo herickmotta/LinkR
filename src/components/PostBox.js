@@ -1,21 +1,17 @@
 import React, { useContext,useEffect } from 'react'
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
-import axios from 'axios';
 import PostContext from '../contexts/PostContext';
+
 export default function PostBox() {
-    const { userData } = useContext(UserContext);
-    const { posts, setPosts } = useContext(PostContext);
+    const { posts,getPosts } = useContext(PostContext);
 
     useEffect( () => {
-        const headers = {
-            'user-token': userData.token
-        }
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts?offset=0&limit=10`, {headers})
-        request.then((response) => setPosts(response.data.posts)).catch(e=>console.log(e));
+       getPosts();
     },[])
     
-    if(posts.length === 0) return <h1>Carregando posts...</h1>
+    if(posts === null) return <h1>Carregando posts...</h1>
+    if(posts.lenght === 0) return <h1>Nenhum post encontrado</h1>
     return (
         <>
             {posts.map((post) => {

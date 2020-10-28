@@ -1,8 +1,5 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import UserContext from '../contexts/UserContext';
 import Topbar from '../components/TopBar';
 import TimelineSection from '../components/TimelineSection';
 
