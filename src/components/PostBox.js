@@ -6,7 +6,6 @@ import UserContext from '../contexts/UserContext';
 export default function PostBox() {
     const { userData } = useContext(UserContext);
     const { posts } = getPosts();
-    console.log(posts);
     return (
         <>
             {posts.map((post) => {
