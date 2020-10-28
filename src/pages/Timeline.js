@@ -19,7 +19,7 @@ export default function Timeline(){
 const Page = styled.div`
     width: 100%;
     background: #333;
-    height: 100vh;
     display:flex;
     justify-content:center;
+    background-repeat: repeat;
 `

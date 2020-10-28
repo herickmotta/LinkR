@@ -20,7 +20,7 @@ export function UserContextProvider(props){
     const [logIn,setLogIn] = useState(loginStruct);
     const [signUp,setSignUp] = useState(signUpStruct);
     const [userData,setUserData] = useState(userDataStruct);
-    const [inputPost, setInputPost] = useState({});
+    const [inputPost, setInputPost] = useState({'link':''});
     console.log(userData);
     return(
         <UserContext.Provider value={{setLogIn,setSignUp,logIn,signUp,setUserData,userData,inputPost,setInputPost}}>

@@ -1,44 +1,33 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
-import getPosts from '../data/postsMock';
 import TrendingTopics from './TrendingTopics';
-import axios from 'axios';
+import PostBox from './PostBox';
 export default function TimelineSection() {
-    const { userData,setInputPost,inputPost } = useContext(UserContext);
-    const {posts} = getPosts();
-    const token =  "34d11bbf-f9e9-4934-9b21-ccaada2a1536";
-    function publishPost(){
-        if(inputPost.link.length !== 0){
-            const headers = {
-                'user-token': token
-            }
-            const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts`,inputPost,{headers});
-            request.then((response) => console.log(response)).catch((e)=>console.log(e));
-        }
-    }
+    const { userData } = useContext(UserContext);
+
     return (
         <Page>
-            <h1>timeline</h1>
+            <h1 className="title">timeline</h1>
             <Section>
-                <div>  
+                <PostsSection>
                     <InputPostBox>
                         <LeftBox>
                             <img src={userData.pictureUrl} />
                         </LeftBox>
                         <RightBox>
                             <h1>O que você tem pra favoritar hoje?</h1>
-                            <input placeholder="Insira aqui o link" onChange={e => setInputPost({ ...inputPost, 'link': e.target.value })}/>
-                            <textarea placeholder="Comentário" onChange={e => setInputPost({ ...inputPost, 'text': e.target.value })}/>
-                            <div>
-                            <Button onClick={(e) => publishPost()}>
+                            <input placeholder="Insira aqui o link" />
+                            <textarea placeholder="Comentário" />
+                            <div className="buttonDiv">
+                                <Button>
                                     Publicar
                             </Button>
                             </div>
                         </RightBox>
                     </InputPostBox>
-
-                </div>
+                    <PostBox />
+                    </PostsSection>
                 <TrendingTopics />
             </Section>
         </Page>
@@ -48,7 +37,7 @@ export default function TimelineSection() {
 const Page = styled.div`
     color:#FFF;
     padding-top:100px;
-    h1{
+    .title{
         font-size: 3vw;
         font-family: 'Oswald', sans-serif;
         margin-bottom: 20px;
@@ -64,6 +53,7 @@ const InputPostBox = styled.div`
     background: white;
     border-radius: 16px;
     width: 40vw;
+    height: 45%;
 `
 const LeftBox = styled.div`
     height: 100;
@@ -91,6 +81,7 @@ const RightBox = styled.div`
         font-size: 15px;
         font-family: Lato;
         font-weight: 300;
+        margin-bottom:5px;
     }
     input{
         background: #EFEFEF;
@@ -111,7 +102,7 @@ const RightBox = styled.div`
         margin: 0px 0px 5px 0px;
         padding: 5px 10px;
     }
-    div{
+    .buttonDiv{
         display: flex;
         justify-content: flex-end;
     }
@@ -121,8 +112,12 @@ const Button = styled.button`
     border-radius: 5px;
     color: white;
     width: 112px;
-    height: 25px;
+    height: 28px;
     font-family: Lato;
     text-align: center;
     font-size: 14px;
+`;
+const PostsSection = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
