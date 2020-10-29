@@ -8,7 +8,6 @@ export default function InputPostBoxSection(){
     const { userData } = useContext(UserContext);
     const { setInputPost, inputPost ,getPosts} = useContext(PostContext);
     function publishPost() {
-        //DESABILITAR OS CAMPOS P EDIÇÃO
         if(buttonDisabled) return;
         if (inputPost.link.length !== 0) {
             setButtonDisabled(true);
@@ -18,7 +17,6 @@ export default function InputPostBoxSection(){
             const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts`, inputPost, { headers });
             request.then(()=>{
                 setButtonDisabled(false);
-                //LIMPAR CAMPOS
                 getPosts();
             });
             request.catch(() => {

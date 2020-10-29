@@ -4,15 +4,22 @@ import PostContext from '../contexts/PostContext';
 import {Link} from 'react-router-dom';
 import ReactHashtag from "react-hashtag";
 import { useHistory } from 'react-router-dom';
+import { IoIosHeartEmpty,IoIosHeart } from "react-icons/io";
+import axios from 'axios';
 export default function PostBox() {
-    const { posts } = useContext(PostContext);
+    const { posts,likedPosts,like,deslike } = useContext(PostContext);
     const history = useHistory();
     function goToHashtag(val){
         val = val.slice(1);
         history.push(`/hashtag/${val}`)
     }
-    if(posts === null) return <Post><h1>Loading posts...</h1></Post>
-    if(posts.lenght === 0) return <Post><h1>No posts found</h1></Post>
+    const liked = false;
+    
+    if(posts === null){
+        return <Post><h1>Loading posts...</h1></Post>
+    } else if(posts.length === 0){
+        return <Post><h1>No posts found</h1></Post>
+    }
     return (
         <>
             {posts.map((post) => {
@@ -20,6 +27,10 @@ export default function PostBox() {
                 <Post key={post.id}>
                     <LeftBox>
                         <Link to={`/user/${post.user.id}`}><img src={post.user.avatar} /></Link>
+                        <div className='likeContainer'>
+                            {likedPosts.includes(post) ? <IoIosHeart onClick={() => dislike(post.id)}/> : <IoIosHeartEmpty onClick={() => like(post.id)}/>}
+                            <p>likes</p>
+                        </div>
                     </LeftBox>
                     <RightBox>
                     <Link to={`/user/${post.user.id}`}>{post.user.username}</Link>
@@ -71,6 +82,15 @@ const LeftBox = styled.div`
         border-radius: 26.5px;
         width:35px;
         height:35px;
+    }
+    .likeContainer{
+        margin-top:20px;
+        text-align:center;
+        font-size: 2vw;
+        p{
+            font-size: 1vw;
+            font-weight: normal;
+        }
     }
 `;
 const RightBox = styled.div`

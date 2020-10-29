@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 export default function TrendingTopics(){
     const {userData} = useContext(UserContext);
     const [hashtags,setHashtags] = useState([]);
+    const [inputHashtag,setInputHashTag] = useState('');
+    const history = useHistory();
     useEffect(()=> {
         const headers = {
             'user-token': userData.token
@@ -19,6 +22,9 @@ export default function TrendingTopics(){
         <>
         <Section>
             <h2>trending</h2>
+            <form onSubmit={(e)=> {e.preventDefault();history.push(`/hashtag/${inputHashtag}`)}}>
+                <input placeholder='Procure por hashtag' onChange={e =>setInputHashTag(e.target.value)} value={inputHashtag}/>
+            </form>
             <List>
                {hashtags.length === 0 ?
                 <h1>Loading...</h1>
