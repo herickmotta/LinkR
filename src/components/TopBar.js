@@ -91,6 +91,8 @@ const Menu = styled.div`
         padding: 10px;
     }
     .arrowDown{
-        font-size: 8vw;
+        @media(max-width:600px){
+            font-size: 8vw;
+        }
     }
 `
