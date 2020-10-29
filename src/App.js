@@ -2,8 +2,7 @@ import React from 'react';
 import Login from './pages/Login';
 import Timeline from './pages/Timeline';
 import TimelineSection from './components/TimelineSection';
-import HashtagSection from './components/HashtagSection';
-import UserPostsSection from './components/UserPostsSection';
+
 import {
     BrowserRouter as Router,
     Switch,
