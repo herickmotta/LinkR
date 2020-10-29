@@ -4,6 +4,7 @@ import Timeline from './pages/Timeline';
 import MyPostsSection from './components/MyPostsSection';
 import TimelineSection from './components/TimelineSection';
 import HashtagSection from './components/HashtagSection';
+import UserPostsSection from './components/UserPostsSection';
 import {
     BrowserRouter as Router,
     Switch,
@@ -36,6 +37,11 @@ export default function App(){
                         <Route path='/hashtag/:hashtag'>
                             <Timeline >
                                 <HashtagSection /> 
+                            </Timeline>
+                        </Route>
+                        <Route path='/user/:id'>
+                            <Timeline >
+                                <UserPostsSection /> 
                             </Timeline>
                         </Route>
                     </Switch>

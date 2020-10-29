@@ -6,23 +6,23 @@ import PostContext from '../contexts/PostContext';
 import { useParams } from 'react-router';
 import UserContext from '../contexts/UserContext';
 import axios from 'axios';
-export default function HashtagSection() {
-    const {setPosts} = useContext(PostContext);
-    let {hashtag} = useParams();
+export default function UserPostsSection() {
+    const {setPosts,posts} = useContext(PostContext);
+    let {id} = useParams();
     const { userData } = useContext(UserContext);
     useEffect( () => {
-        getHashtagPosts();
-     },[hashtag])
-     function getHashtagPosts(){
+        getUserPosts();
+     },[])
+     function getUserPosts(){
         const headers = {
             'user-token': userData.token
         }
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/${hashtag}/posts`, {headers})
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/users/${id}/posts`, {headers})
         request.then((response) => setPosts(response.data.posts)).catch(e=>alert('Houve uma falha ao obter os posts, por favor atualize a página'));
     }
     return (
         <Page>
-            <h1 className="title">{hashtag}</h1>
+            <h1 className="title">{`${posts[0].user.username}'s posts`}</h1>
             <Section>
                 <PostsSection>
                     <PostBox />

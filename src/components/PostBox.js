@@ -1,10 +1,16 @@
 import React, { useContext,useEffect } from 'react'
 import styled from 'styled-components';
 import PostContext from '../contexts/PostContext';
-
+import {Link} from 'react-router-dom';
+import ReactHashtag from "react-hashtag";
+import { useHistory } from 'react-router-dom';
 export default function PostBox() {
     const { posts,getPosts } = useContext(PostContext);
- 
+    const history = useHistory();
+    function goToHashtag(val){
+        val = val.slice(1);
+        history.push(`/hashtag/${val}`)
+    }
     if(posts === null) return <h1>Carregando posts...</h1>
     if(posts.lenght === 0) return <h1>Nenhum post encontrado</h1>
     return (
@@ -13,11 +19,11 @@ export default function PostBox() {
                 return(
                 <Post key={post.id}>
                     <LeftBox>
-                        <img src={post.user.avatar} />
+                        <Link to={`/user/${post.user.id}`}><img src={post.user.avatar} /></Link>
                     </LeftBox>
                     <RightBox>
-                        <a>{post.user.username}</a>
-                        <p>{post.text}</p>
+                    <Link to={`/user/${post.user.id}`}>{post.user.username}</Link>
+                       <p><ReactHashtag onHashtagClick={val => goToHashtag(val)}>{post.text}</ReactHashtag></p>
                         <ImgBox ImgBox onClick={() => window.open(post.link,'test','width: 400, height: 400')}>
                             <div>
                             <p className="titleLink">{post.linkTitle}</p>
@@ -33,6 +39,7 @@ export default function PostBox() {
         </>
     )
 }
+
 
 const Post = styled.div`
     margin-top: 20px;
@@ -73,6 +80,11 @@ const RightBox = styled.div`
         color: #B7B7B7;
         margin-top: 5px;
         font-family: Lato;
+    }
+    span{
+        font-weight:bold;
+        color:#FFF;
+        cursor:pointer;
     }
 `;
 const ImgBox = styled.div`
