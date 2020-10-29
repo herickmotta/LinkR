@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import TrendingTopics from './TrendingTopics';
 import InputPostBoxSection from './InputPostBoxSection';
@@ -6,34 +6,42 @@ import PostBox from './PostBox';
 import PostContext from '../contexts/PostContext';
 import { useParams } from 'react-router';
 export default function TimelineSection(props) {
-    const {getPosts,getMyPosts,getHashtagPosts,getUserPosts} = useContext(PostContext);
-    const {title:displayTitle} = props;
+    const {getPosts,getMyPosts,getHashtagPosts,getUserPosts,posts} = useContext(PostContext);
+    const {title} = props;
     const {hashtag} = useParams();
     const {id} = useParams();
+    const [displayTitle,setDisplayTitle] = useState('timeline');
+    const [showInput,setShowInput] = useState(false);
+    
+    useEffect(() => {
+        choosePosts();
+    }, [displayTitle, hashtag, id])
 
-    if(!(hashtag && id)){
-        useEffect( () => {
-            choosePosts();
-         },[displayTitle,hashtag,id])
-    }
     function choosePosts(){
-        if(displayTitle === 'timeline'){
+        if(title === 'timeline'){
+            setDisplayTitle('timeline');
+            setShowInput(true);
             getPosts();
-        } else if(displayTitle === 'my posts'){
+        } else if(title === 'my posts'){
+            setDisplayTitle('my posts');
+            setShowInput(false);
             getMyPosts();
         } else if(hashtag){
+            setDisplayTitle(`# ${hashtag}`);
+            setShowInput(false);
             getHashtagPosts(hashtag);
         } else if(id){
+            setShowInput(false);
             getUserPosts(id);
+            setDisplayTitle(`${posts[0].user.username}'s Posts`);
         }
     }
-
     return (
         <Page>
             <h1 className="title">{displayTitle}</h1>
             <Section>
                 <PostsSection>
-                    <InputPostBoxSection /> 
+                    {showInput ?  <InputPostBoxSection /> :''}
                     <PostBox />
                 </PostsSection>
                 <TrendingTopics />

@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import ReactHashtag from "react-hashtag";
 import { useHistory } from 'react-router-dom';
 export default function PostBox() {
-    const { posts,getPosts } = useContext(PostContext);
+    const { posts } = useContext(PostContext);
     const history = useHistory();
     function goToHashtag(val){
         val = val.slice(1);
