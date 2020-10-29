@@ -24,7 +24,7 @@ export default function PostBox() {
                     <RightBox>
                     <Link to={`/user/${post.user.id}`}>{post.user.username}</Link>
                        <p><ReactHashtag onHashtagClick={val => goToHashtag(val)}>{post.text}</ReactHashtag></p>
-                        <ImgBox ImgBox onClick={() => window.open(post.link,'test','width: 400, height: 400')}>
+                        <ImgBox ImgBox onClick={() => window.open(post.link, '_blank')}>
                             <div>
                             <p className="titleLink">{post.linkTitle}</p>
                             <p className="small grey">{post.linkDescription}</p>

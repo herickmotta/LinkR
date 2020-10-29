@@ -99,6 +99,11 @@ const Page = styled.div`
     width: 100%;
     display:flex;
     height: 100vh;
+
+    @media(max-width:600px){
+        flex-direction:column;
+        align-items: center;
+    }
 `
 
 const TitleContainer = styled.div`
@@ -118,8 +123,21 @@ const TitleContainer = styled.div`
         font-size: 2vw;
         line-height: 45px;
     }
+    @media (max-width: 600px){
+        width: 100%;
+        text-align: center;
+        h1{
+            font-size: 15vw;
+            margin-bottom: 0px;
+        }
+        p{
+            font-size: 5vw;
+            line-height: 30px;
+            margin-bottom: 25px;
+        }
+    }
 `
-const Aside = styled.div` //esse Aside estava como form, precisei trocar pra div pq tava dando erro no console de um form dentro do outro
+const Aside = styled.div`
     background: #333;
     width: 38%;
     color: #FFF;
@@ -128,12 +146,19 @@ const Aside = styled.div` //esse Aside estava como form, precisei trocar pra div
     justify-content:center;
     align-items:center;
     span{
-        text-decoration: underline;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
         cursor: pointer;
         color: #FFF;
         font-size: 1vw;
         font-family:'Lato', sans-serif;
         letter-spacing: 1.2px;
+    }
+    @media (max-width: 600px){
+        width: 100vw;
+        span{
+            font-size: 3.5vw;
+        }
     }
 `
 const Form = styled.div`
@@ -161,5 +186,15 @@ const Form = styled.div`
         color:#FFF;
         font-family:inherit;
         margin-bottom: 20px;
+    }
+    @media (max-width: 600px){
+        width: 90vw;
+        margin-top: 35px;
+        input{
+            font-size: 5vw;
+        }
+        button{
+            font-size: 5vw;
+        }
     }
 `
