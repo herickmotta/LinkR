@@ -1,6 +1,9 @@
 import React from 'react';
 import Login from './pages/Login';
 import Timeline from './pages/Timeline';
+import MyPostsSection from './components/MyPostsSection';
+import TimelineSection from './components/TimelineSection';
+import HashtagSection from './components/HashtagSection';
 import {
     BrowserRouter as Router,
     Switch,
@@ -21,13 +24,19 @@ export default function App(){
                             <Login />
                         </Route>
                         <Route path='/timeline'>
-                            <Timeline />
+                            <Timeline >
+                                <TimelineSection /> 
+                            </Timeline>
                         </Route>
                         <Route path='/my-posts'>
-
+                            <Timeline >
+                                <MyPostsSection /> 
+                            </Timeline>
                         </Route>
-                        <Route path='/fulano'>
-                            
+                        <Route path='/hashtag/:hashtag'>
+                            <Timeline >
+                                <HashtagSection /> 
+                            </Timeline>
                         </Route>
                     </Switch>
                 </Router>

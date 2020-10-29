@@ -15,7 +15,8 @@ export function UserContextProvider(props){
     };
     const userDataStruct = {
         username:"HerickM",
-        pictureUrl:"https://pbs.twimg.com/profile_images/802982691478114304/UdQD82ju_400x400.jpg"
+        pictureUrl:"https://pbs.twimg.com/profile_images/802982691478114304/UdQD82ju_400x400.jpg",
+        id:'49'
     }
 
     const [logIn,setLogIn] = useState(loginStruct);

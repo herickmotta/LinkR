@@ -5,17 +5,16 @@ import TrendingTopics from './TrendingTopics';
 import InputPostBoxSection from './InputPostBoxSection';
 import PostBox from './PostBox';
 import PostContext from '../contexts/PostContext';
-export default function TimelineSection() {
-    const {timeline,getPosts} = useContext(PostContext);
+export default function MyPostsSection() {
+    const {timeline,getMyPosts} = useContext(PostContext);
     useEffect( () => {
-        getPosts();
+        getMyPosts();
      },[])
     return (
         <Page>
-            <h1 className="title">timeline</h1>
+            <h1 className="title">my posts</h1>
             <Section>
                 <PostsSection>
-                    <InputPostBoxSection /> 
                     <PostBox />
                 </PostsSection>
                 <TrendingTopics />
@@ -23,7 +22,6 @@ export default function TimelineSection() {
         </Page>
     );
 }
-
 const Page = styled.div`
     color:#FFF;
     padding-top:100px;

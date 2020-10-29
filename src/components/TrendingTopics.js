@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 export default function TrendingTopics(){
     const {userData} = useContext(UserContext);
     const [hashtags,setHashtags] = useState([]);
@@ -21,7 +22,7 @@ export default function TrendingTopics(){
             <List>
                 {hashtags.map(t => 
                     <li key={t.id}>
-                        {`# ${t.name}`}
+                        <Link to ={`/hashtag/${t.name}`}>{`# ${t.name}`}</Link>
                     </li>
                 )}
             </List>

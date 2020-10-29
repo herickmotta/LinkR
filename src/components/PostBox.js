@@ -4,11 +4,7 @@ import PostContext from '../contexts/PostContext';
 
 export default function PostBox() {
     const { posts,getPosts } = useContext(PostContext);
-
-    useEffect( () => {
-       getPosts();
-    },[])
-    
+ 
     if(posts === null) return <h1>Carregando posts...</h1>
     if(posts.lenght === 0) return <h1>Nenhum post encontrado</h1>
     return (
@@ -22,7 +18,7 @@ export default function PostBox() {
                     <RightBox>
                         <a>{post.user.username}</a>
                         <p>{post.text}</p>
-                        <ImgBox>
+                        <ImgBox ImgBox onClick={() => window.open(post.link,'test','width: 400, height: 400')}>
                             <div>
                             <p className="titleLink">{post.linkTitle}</p>
                             <p className="small grey">{post.linkDescription}</p>
@@ -57,7 +53,8 @@ const LeftBox = styled.div`
     margin-right: 5px;
     img{
         border-radius: 26.5px;
-        width: 70%;
+        width:35px;
+        height:35px;
     }
 `;
 const RightBox = styled.div`
@@ -85,6 +82,9 @@ const ImgBox = styled.div`
     padding-left: 15px;
     margin-top: 10px;
     display: flex;
+    justify-content:space-between;
+    overflow-wrap: anywhere;
+    cursor: pointer;
     .small{
         font-size: 11px;
     }

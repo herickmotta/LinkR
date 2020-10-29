@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Topbar from '../components/TopBar';
-import TimelineSection from '../components/TimelineSection';
 
-export default function Timeline(){
+
+export default function Timeline(props){
 
     return (
         <Page>
             <Topbar />
-            <TimelineSection /> 
+            {props.children}
         </Page>
     );
 }

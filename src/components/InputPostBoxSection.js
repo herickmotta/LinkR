@@ -34,8 +34,8 @@ export default function InputPostBoxSection(){
             </LeftBox>
             <RightBox>
                 <h1>O que você tem pra favoritar hoje?</h1>
-                <input placeholder="Insira aqui o link" onChange={e => setInputPost({ ...inputPost, 'link': e.target.value })} />
-                <textarea placeholder="Comentário" onChange={e => setInputPost({ ...inputPost, 'text': e.target.value })} />
+                <input placeholder="Insira aqui o link" onChange={e => setInputPost({ ...inputPost, 'link': e.target.value })} value={inputPost.link} />
+                <textarea placeholder="Comentário" onChange={e => setInputPost({ ...inputPost, 'text': e.target.value })} value={inputPost.text}/>
                 <div className="buttonDiv">
                     <Button onClick={(e) => publishPost()}>
                         {buttonDisabled ? 'Publishing...' : 'Publish'}
