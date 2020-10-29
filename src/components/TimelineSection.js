@@ -1,18 +1,36 @@
 import React, { useContext, useEffect} from 'react';
 import styled from 'styled-components';
-import UserContext from '../contexts/UserContext';
 import TrendingTopics from './TrendingTopics';
 import InputPostBoxSection from './InputPostBoxSection';
 import PostBox from './PostBox';
 import PostContext from '../contexts/PostContext';
-export default function TimelineSection() {
-    const {timeline,getPosts} = useContext(PostContext);
-    useEffect( () => {
-        getPosts();
-     },[])
+import { useParams } from 'react-router';
+export default function TimelineSection(props) {
+    const {getPosts,getMyPosts,getHashtagPosts,getUserPosts} = useContext(PostContext);
+    const {title:displayTitle} = props;
+    const {hashtag} = useParams();
+    const {id} = useParams();
+
+    if(!(hashtag && id)){
+        useEffect( () => {
+            choosePosts();
+         },[displayTitle,hashtag,id])
+    }
+    function choosePosts(){
+        if(displayTitle === 'timeline'){
+            getPosts();
+        } else if(displayTitle === 'my posts'){
+            getMyPosts();
+        } else if(hashtag){
+            getHashtagPosts(hashtag);
+        } else if(id){
+            getUserPosts(id);
+        }
+    }
+
     return (
         <Page>
-            <h1 className="title">timeline</h1>
+            <h1 className="title">{displayTitle}</h1>
             <Section>
                 <PostsSection>
                     <InputPostBoxSection /> 

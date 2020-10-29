@@ -1,7 +1,6 @@
 import React from 'react';
 import Login from './pages/Login';
 import Timeline from './pages/Timeline';
-import MyPostsSection from './components/MyPostsSection';
 import TimelineSection from './components/TimelineSection';
 import HashtagSection from './components/HashtagSection';
 import UserPostsSection from './components/UserPostsSection';
@@ -26,22 +25,22 @@ export default function App(){
                         </Route>
                         <Route path='/timeline'>
                             <Timeline >
-                                <TimelineSection /> 
+                                <TimelineSection title='timeline'/> 
                             </Timeline>
                         </Route>
                         <Route path='/my-posts'>
                             <Timeline >
-                                <MyPostsSection /> 
+                                <TimelineSection title='my posts'/> 
                             </Timeline>
                         </Route>
                         <Route path='/hashtag/:hashtag'>
                             <Timeline >
-                                <HashtagSection /> 
+                                <TimelineSection /> 
                             </Timeline>
                         </Route>
                         <Route path='/user/:id'>
                             <Timeline >
-                                <UserPostsSection /> 
+                                <TimelineSection /> 
                             </Timeline>
                         </Route>
                     </Switch>
