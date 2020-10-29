@@ -25,12 +25,14 @@ export default function PostBox() {
                     <Link to={`/user/${post.user.id}`}>{post.user.username}</Link>
                        <p><ReactHashtag onHashtagClick={val => goToHashtag(val)}>{post.text}</ReactHashtag></p>
                         <ImgBox ImgBox onClick={() => window.open(post.link, '_blank')}>
-                            <div>
-                            <p className="titleLink">{post.linkTitle}</p>
-                            <p className="small grey">{post.linkDescription}</p>
-                            <p className="small">{post.link}</p>
+                            <div className='descriptionContainer'>
+                                <p className="titleLink">{post.linkTitle}</p>
+                                <p className="small grey">{post.linkDescription}</p>
+                                <p className="small">{post.link}</p>
                             </div>
-                            <img src={post.linkImage} />
+                            <div className='imgContainer'>
+                                <img src={post.linkImage} />
+                            </div>
                         </ImgBox>
                     </RightBox>
                 </Post>
@@ -111,16 +113,25 @@ const ImgBox = styled.div`
         color: #CECECE;
         font-size: 16px;
     }
-    div{
+  
+    .descriptionContainer{
+        width:60%;
         padding-top: 15px;
         padding-bottom: 15px;
         margin-right: 10px;
     }
+    .imgContainer{
+        display:flex;
+        align-items:center;
+        height:100%;
+        width:40%;
+        border-top-right-radius:11px;
+        border-bottom-right-radius:11px;
+        overflow:hidden;
+    }
     img{
-        border-top-right-radius: 11px;
-        border-bottom-right-radius: 11px;
-        height: 100%;
-        width: 40%;
+        width:100%;
+        
     }
     p{
         margin: 10px 0px;

@@ -18,11 +18,15 @@ export function UserContextProvider(props){
         pictureUrl:"https://pbs.twimg.com/profile_images/802982691478114304/UdQD82ju_400x400.jpg",
         id:'49'
     }
+    const inputStruct = {
+        link: '',
+        text:''
+    }
 
     const [logIn,setLogIn] = useState(loginStruct);
     const [signUp,setSignUp] = useState(signUpStruct);
     const [userData,setUserData] = useState(userDataStruct);
-    const [inputPost, setInputPost] = useState({'link':''});
+    const [inputPost, setInputPost] = useState(inputStruct);
     userData.token = "34d11bbf-f9e9-4934-9b21-ccaada2a1536"; //TEMPORARIO- REMOVER
     return(
         <UserContext.Provider value={{setLogIn,setSignUp,logIn,signUp,setUserData,userData,inputPost,setInputPost}}>
