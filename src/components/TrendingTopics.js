@@ -39,6 +39,9 @@ const Section = styled.section`
     height: 350px;
     border-radius: 10px;
     margin: 0 0 0 20px;
+    @media(max-width: 600px){
+        display: none;
+    }
 
     h2{
         padding:15px;

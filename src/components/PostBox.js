@@ -47,6 +47,10 @@ const Post = styled.div`
     background: #151515;
     border-radius: 16px;
     width: 40vw;
+    @media (max-width: 600px){
+        width: 100%;
+        border-radius: 0px;
+    }
 `;
 const LeftBox = styled.div`
     height: 100;
