@@ -11,8 +11,8 @@ export default function PostBox() {
         val = val.slice(1);
         history.push(`/hashtag/${val}`)
     }
-    if(posts === null) return <h1>Carregando posts...</h1>
-    if(posts.lenght === 0) return <h1>Nenhum post encontrado</h1>
+    if(posts === null) return <Post><h1>Loading posts...</h1></Post>
+    if(posts.lenght === 0) return <Post><h1>No posts found</h1></Post>
     return (
         <>
             {posts.map((post) => {
@@ -52,6 +52,9 @@ const Post = styled.div`
     @media (max-width: 600px){
         width: 100%;
         border-radius: 0px;
+    }
+    h1{
+        padding:20px;
     }
 `;
 const LeftBox = styled.div`

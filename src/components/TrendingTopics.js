@@ -14,17 +14,21 @@ export default function TrendingTopics(){
         const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/trending`,{headers})
         request.then((response) => setHashtags(response.data.hashtags)).catch(e=>console.log(e));
     },[])
-    if(hashtags.length===0) return <h1>Carregando...</h1>
+    
     return (
         <>
         <Section>
             <h2>trending</h2>
             <List>
-                {hashtags.map(t => 
+               {hashtags.length === 0 ?
+                <h1>Loading...</h1>
+                :
+                hashtags.map(t => 
                     <li key={t.id}>
                         <Link to ={`/hashtag/${t.name}`}>{`# ${t.name}`}</Link>
                     </li>
-                )}
+                )
+            }
             </List>
         </Section>
         </>
