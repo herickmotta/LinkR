@@ -32,14 +32,26 @@ const Page = styled.div`
         font-family: 'Oswald', sans-serif;
         margin-bottom: 20px;
     }
+    @media (max-width: 600px){
+        width: 100%;
+        .title{
+            font-size: 7vw;
+            margin-left: 15px;
+        }
+    }
 `;
 
 const Section = styled.section`
     display:flex;
+    @media (max-width: 600px){
+        width: 100%;
+    }
 `;
-
 
 const PostsSection = styled.div`
     display: flex;
     flex-direction: column;
+    @media (max-width: 600px){
+        width: 100%;
+    }
 `;

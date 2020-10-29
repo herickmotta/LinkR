@@ -28,7 +28,7 @@ export default function InputPostBoxSection(){
         } else alert("Preencha o campo link!");
     }
     return (
-        <InputPostBox> {/*COMPONENTIZAR ESSE ELEMENTO*/}
+        <InputPostBox>
             <LeftBox>
                 <img src={userData.pictureUrl} />
             </LeftBox>
@@ -51,6 +51,10 @@ const InputPostBox = styled.div`
     border-radius: 16px;
     width: 40vw;
     height: 45%;
+    @media (max-width: 600px){
+        width: 100%;
+        border-radius: 0px;
+    }
 `
 const LeftBox = styled.div`
     height: 100;

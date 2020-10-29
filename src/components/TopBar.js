@@ -18,7 +18,7 @@ export default function Topbar(){
                  translate={DropMenu? 'translateY(0)':'translateY(-20px)'}
                  rotate={DropMenu? 'rotate(180deg)':'rotate(0)'}
                 >
-                    <div><IoIosArrowDown  /></div>
+                    <div><IoIosArrowDown  class="arrowDown"/></div>
                     <nav>
                         <Link to='/my-posts'>My posts</Link>
                         <Link to='/'>Logout</Link>
@@ -56,6 +56,11 @@ const Header = styled.header`
         width: 50px;
         border-radius: 50%;
     }
+    @media (max-width: 600px){
+       h1{
+           font-size: 10vw;
+       }
+    }
 `
 
 const Menu = styled.div`
@@ -85,5 +90,7 @@ const Menu = styled.div`
     a{
         padding: 10px;
     }
-    
+    .arrowDown{
+        font-size: 8vw;
+    }
 `
