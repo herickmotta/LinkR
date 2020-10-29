@@ -10,7 +10,7 @@ export default function Topbar(){
     return(
         <Header>
             <h1>
-                linkr
+                <Link to='/timeline'>linkr</Link>
             </h1>
             <div onClick={() => SetDropMenu(!DropMenu)}>
                 <Menu
