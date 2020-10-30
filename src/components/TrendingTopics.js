@@ -66,6 +66,7 @@ const Section = styled.section`
         border: 1px solid grey;
         border-radius: 5px;
         margin-top: 8px;
+        color:#FFF;
     }
 `;
 
