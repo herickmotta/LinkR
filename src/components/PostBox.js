@@ -93,10 +93,11 @@ const LeftBox = styled.div`
     .likeContainer{
         margin-top:20px;
         text-align:center;
-        font-size: 2vw;
+        font-size: 26px;
         p{
-            font-size: 1vw;
+            font-size: 16px;
             font-weight: normal;
+            font-family: 'Lato';
         }
         .liked{
             color:red;

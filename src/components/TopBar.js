@@ -17,6 +17,7 @@ export default function Topbar(){
                  opacity={DropMenu? '1':'0'}
                  translate={DropMenu? 'translateY(0)':'translateY(-20px)'}
                  rotate={DropMenu? 'rotate(180deg)':'rotate(0)'}
+                 display={DropMenu? 'flex' : 'none'}
                 >
                     <div><IoIosArrowDown  class="arrowDown"/></div>
                     <nav>
@@ -75,18 +76,19 @@ const Menu = styled.div`
     nav {
         display:flex;
         flex-direction:column;
-        font-size: 1.5vw;
+        font-size: 22px;
         top:50px;
         position: absolute;
         background:#151515;
         border-bottom-left-radius: 25px;
         font-family:'Lato', sans-serif;
         width: 200px;
-        right: -63px;
+        right: -75px;
         opacity: ${props => props.opacity};
         transition: 400ms ease;
         padding: 20px;
         transform: ${props => props.translate};
+        display: ${props => props.display};
     }
     a{
         padding: 10px;
