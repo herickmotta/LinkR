@@ -86,7 +86,7 @@ const LeftBox = styled.div`
     padding-top: 15px;
     margin-right: 5px;
     img{
-        border-radius: 26.5px;
+        border-radius: 50%;
         width:35px;
         height:35px;
     }

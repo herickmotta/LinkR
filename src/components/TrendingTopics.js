@@ -46,7 +46,7 @@ const Section = styled.section`
     background: #151515;
     color:#FFF;
     width: 300px;
-    height: 350px;
+    height: 400px;
     border-radius: 10px;
     margin: 0 0 0 20px;
     @media(max-width: 600px){

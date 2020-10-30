@@ -41,7 +41,7 @@ export default function Login() {
 
             request.then((response) => {
                 alert('Usuário cadastrado!');
-                setSignUp(false);
+                setSignUpState(false);
                 setButtonDisabled(false);
             });
             request.catch((error) => {
@@ -74,16 +74,16 @@ export default function Login() {
                     {
                         signUpState ?
                             <Form>
-                                <input type="email" placeholder="e-mail" onChange={e => setSignUp({ ...signUp, 'email': e.target.value })} />
-                                <input type="password" placeholder="password" onChange={e => setSignUp({ ...signUp, 'password': e.target.value })} />
-                                <input type="text" placeholder="username" onChange={e => setSignUp({ ...signUp, 'username': e.target.value })} />
-                                <input type="url" placeholder="picture url" onChange={e => setSignUp({ ...signUp, 'pictureUrl': e.target.value })} />
+                                <input type="email" placeholder="e-mail" value={signUp.email} onChange={e => setSignUp({ ...signUp, 'email': e.target.value })} />
+                                <input type="password" placeholder="password" value={signUp.password}onChange={e => setSignUp({ ...signUp, 'password': e.target.value })} />
+                                <input type="text" placeholder="username" value={signUp.username}onChange={e => setSignUp({ ...signUp, 'username': e.target.value })} />
+                                <input type="url" placeholder="picture url" value={signUp.pictureUrl}onChange={e => setSignUp({ ...signUp, 'pictureUrl': e.target.value })} />
                                 <button type="submit">Sign Up</button>
                             </Form>
                             :
                             <Form>
-                                <input type="email" placeholder="e-mail" onChange={e => setLogIn({ ...logIn, 'email': e.target.value })} />
-                                <input type="password" placeholder="password" onChange={e => setLogIn({ ...logIn, 'password': e.target.value })} />
+                                <input type="email" placeholder="e-mail" value={logIn.email}onChange={e => setLogIn({ ...logIn, 'email': e.target.value })} />
+                                <input type="password" placeholder="password" value={logIn.password}onChange={e => setLogIn({ ...logIn, 'password': e.target.value })} />
                                 <button type="submit">Log In</button>
                             </Form>
                     }
