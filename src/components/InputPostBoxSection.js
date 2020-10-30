@@ -28,7 +28,7 @@ export default function InputPostBoxSection(){
     return (
         <InputPostBox>
             <LeftBox>
-                <img src={userData.pictureUrl} />
+                <img src={userData.avatar} />
             </LeftBox>
             <RightBox>
                 <h1>O que você tem pra favoritar hoje?</h1>

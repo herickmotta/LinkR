@@ -26,7 +26,7 @@ export default function Topbar(){
                         <Link to='/'>Logout</Link>
                     </nav>
                 </Menu>
-                <img src={userData.pictureUrl} />
+                <img src={userData.avatar} />
             </div>
         </Header>
     );
