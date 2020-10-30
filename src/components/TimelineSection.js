@@ -23,7 +23,6 @@ export default function TimelineSection(props) {
             setShowInput(true);
             getPosts();
         } else if(title === 'my posts'){
-            console.log('my posts');
             setDisplayTitle(title);
             setShowInput(false);
             getMyPosts();

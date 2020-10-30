@@ -16,7 +16,6 @@ export function PostContextProvider(props){
     useEffect(()=> {
         getLikedPosts();
     },[])
-    console.log(likedPosts);
     function getLikedPosts(){
         const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/posts/liked`, {headers});
         request.then((response) => setLikedPosts(response.data.posts)).catch(e=>alert('Erro ao buscar liked posts'));

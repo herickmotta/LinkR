@@ -15,7 +15,7 @@ export default function TrendingTopics(){
             'user-token': userData.token
         }
         const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/hashtags/trending`,{headers})
-        request.then((response) => setHashtags(response.data.hashtags)).catch(e=>console.log(e));
+        request.then((response) => setHashtags(response.data.hashtags)).catch(e=>alert('Erro ao buscar trending, atualize a página'));
     },[])
     
     return (

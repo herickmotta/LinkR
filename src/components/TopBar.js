@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 export default function Topbar(){
     const [DropMenu,SetDropMenu] = useState(false);
     const {userData,logOut} = useContext(UserContext);
-    console.log(userData);
     return(
         <Header>
             <h1>
