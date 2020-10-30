@@ -5,7 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import {Link} from 'react-router-dom';
 export default function Topbar(){
     const [DropMenu,SetDropMenu] = useState(false);
-    const {userData} = useContext(UserContext);
+    const {userData,logOut} = useContext(UserContext);
     console.log(userData);
     return(
         <Header>
@@ -23,7 +23,7 @@ export default function Topbar(){
                     <nav>
                         <Link to='/my-posts'>My posts</Link>
                         <Link to='/my-likes'>My likes</Link>
-                        <Link to='/'>Logout</Link>
+                        <Link to='/' onClick={()=>logOut()}>Logout</Link>
                     </nav>
                 </Menu>
                 <img src={userData.avatar} />

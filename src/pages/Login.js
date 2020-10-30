@@ -40,8 +40,9 @@ export default function Login() {
             const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/linkr/sign_up', signUp);
 
             request.then((response) => {
-                console.log(response)
-                history.push('/timeline');
+                alert('Usuário cadastrado!');
+                setSignUp(false);
+                setButtonDisabled(false);
             });
             request.catch((error) => {
                 alert('Erro ao cadastrar! Verifique os campos!')

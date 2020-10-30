@@ -36,7 +36,7 @@ export default function InputPostBoxSection(){
                 <textarea placeholder="Comentário" onChange={e => setInputPost({ ...inputPost, 'text': e.target.value })} value={inputPost.text}/>
                 <div className="buttonDiv">
                     <Button onClick={(e) => publishPost()}>
-                        {buttonDisabled ? 'Publishing...' : 'Publish'}
+                        {buttonDisabled ? 'Publicando...' : 'Publicar'}
                     </Button>
                 </div>
             </RightBox>
