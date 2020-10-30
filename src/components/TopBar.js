@@ -21,6 +21,7 @@ export default function Topbar(){
                     <div><IoIosArrowDown  class="arrowDown"/></div>
                     <nav>
                         <Link to='/my-posts'>My posts</Link>
+                        <Link to='/my-likes'>My likes</Link>
                         <Link to='/'>Logout</Link>
                     </nav>
                 </Menu>

@@ -27,9 +27,9 @@ export default function App(){
                                 <TimelineSection title='timeline'/> 
                             </Timeline>
                         </Route>
-                        <Route path='/my-posts'>
+                        <Route path='/my-posts' exact>
                             <Timeline >
-                                <TimelineSection title='my posts'/> 
+                                <TimelineSection title='my posts' /> 
                             </Timeline>
                         </Route>
                         <Route path='/hashtag/:hashtag'>
@@ -40,6 +40,11 @@ export default function App(){
                         <Route path='/user/:id'>
                             <Timeline >
                                 <TimelineSection /> 
+                            </Timeline>
+                        </Route>
+                        <Route path='/my-likes' exact>
+                            <Timeline >
+                                <TimelineSection title='my likes'/> 
                             </Timeline>
                         </Route>
                     </Switch>
