@@ -23,7 +23,7 @@ export default function TrendingTopics(){
         <Section>
             <h2>trending</h2>
             <form onSubmit={(e)=> {e.preventDefault();history.push(`/hashtag/${inputHashtag}`)}}>
-                <input placeholder='Procure por hashtag' onChange={e =>setInputHashTag(e.target.value)} value={inputHashtag}/>
+                <input placeholder='Procure por hashtag' className ="hashtagInput" onChange={e =>setInputHashTag(e.target.value)} value={inputHashtag}/>
             </form>
             <List>
                {hashtags.length === 0 ?
@@ -57,6 +57,15 @@ const Section = styled.section`
         padding:15px;
         border-bottom: 1px solid rgba(255,255,255,0.3);
         font-size: 2vw;
+    }
+    .hashtagInput{
+        margin: 0 auto;
+        display: flex;
+        text-align: center;
+        background: #151515;
+        border: 1px solid grey;
+        border-radius: 5px;
+        margin-top: 8px;
     }
 `;
 

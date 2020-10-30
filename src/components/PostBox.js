@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { IoIosHeartEmpty,IoIosHeart } from "react-icons/io";
 import axios from 'axios';
 export default function PostBox() {
-    const { posts,likedPosts,like,dislike } = useContext(PostContext);
+    const { posts,likedPosts,like,dislike, setPost } = useContext(PostContext);
     const history = useHistory();
     function goToHashtag(val){
         val = val.slice(1);
@@ -18,6 +18,8 @@ export default function PostBox() {
         likedPosts.forEach(post => {
             if(post.id === id){
                 isLiked = true;
+                post.likes.length++;
+                setPost
             }
         });
         return isLiked;
