@@ -19,9 +19,7 @@ export default function App(){
             <PostContextProvider>
                 <Router>
                     <Switch>
-                        <Route path='/' exact>
-                            <Login />
-                        </Route>
+                        
                         <Route path='/timeline'>
                             <Timeline >
                                 <TimelineSection title='timeline'/> 
@@ -46,6 +44,9 @@ export default function App(){
                             <Timeline >
                                 <TimelineSection title='my likes'/> 
                             </Timeline>
+                        </Route>
+                        <Route path='/' >
+                            <Login />
                         </Route>
                     </Switch>
                 </Router>

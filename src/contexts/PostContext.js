@@ -13,6 +13,7 @@ export function PostContextProvider(props){
     const headers = {
         'user-token': userData.token
     }
+    console.log(posts);
     useEffect(()=> {
         getLikedPosts();
     },[])
